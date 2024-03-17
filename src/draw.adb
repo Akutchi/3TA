@@ -20,14 +20,50 @@ package body Draw is
     end drawRow;
 
 
+    procedure drawTokens (Row : BoardRow.Vector)
+    is
+
+        Row_Str  : Unbounded_String;
+        Token    : String (1 .. 1);
+
+    begin
+
+        for Token_Rep of Row loop
+
+            case Token_Rep is
+
+                when 1      => Token := "X";
+                when 2      => Token := "O";
+                when others => Token := " ";
+            end case;
+
+            Append (Row_Str, "| " & Token & " ");
+        end loop;
+        Append (Row_Str, "|");
+
+        Put_Line (To_String (Row_Str));
+
+    end drawTokens;
+
     procedure drawBoard (GModel : Any_TTTModel)
     is
         nbCol : Integer := GModel.Cols;
     begin
 
-        for I in 1 .. GModel.Rows+1 loop
-            drawRow (nbCol);
+        for I in 1 .. GModel.Rows loop
+
+            declare
+
+                Row_I : BoardRow.Vector := GModel.Row (I);
+
+            begin
+
+                drawRow (nbCol);
+                drawTokens (Row_I);
+            end;
+
         end loop;
+        drawRow (nbCol);
 
     end drawBoard;
 

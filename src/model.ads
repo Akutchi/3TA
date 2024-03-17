@@ -21,13 +21,20 @@ package Model is
     function Rows (M : TTTModel) return Positive;
     function Cols (M : TTTModel) return Positive;
 
+    function Row (M : TTTModel; Index : Positive) return BoardRow.Vector;
+
+    function Max_Turn (M : TTTModel) return Positive;
+
+    procedure Update (M : TTTModel; Player, Board_Case : String);
+
 private
 
     function Create_Board (nbRow, nbColumn : Positive) return Board.Vector;
 
     type TTTModel (nbRow : Integer; nbColumn : Integer) is tagged record
 
-        board_Rep : Board.Vector := Create_Board (nbRow, nbColumn);
+        board_Rep   : Board.Vector := Create_Board (nbRow, nbColumn);
+        Total_Case  : Positive := nbRow * nbColumn;
 
     end record;
 

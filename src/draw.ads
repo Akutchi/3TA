@@ -6,5 +6,7 @@ package Draw is
 
 private
     procedure drawRow (nbColumn : Integer);
+    procedure drawTokens (Row : BoardRow.Vector);
+
 
 end Draw;
